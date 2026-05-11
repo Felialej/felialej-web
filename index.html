@@ -6,7 +6,9 @@
 
   <title>Felialej | Cantante y Productor</title>
 
-  <link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
+<link rel="stylesheet" href="styles.css" />
 
   <!-- Iconos de redes -->
   <link
@@ -16,6 +18,21 @@
 </head>
 
 <body>
+  <!-- Barra de progreso al hacer scroll -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Intro visual de carga -->
+  <div class="intro-loader" id="introLoader">
+    <div class="intro-orbit"></div>
+
+    <div class="intro-content">
+      <p data-i18n="introLabel"></p>
+      <h2>FELIALEJ</h2>
+      <span data-i18n="introSubtitle">Cargando...</span>
+
+    </div>
+  </div>
+
   <!-- Cursor personalizado -->
   <div class="cursor"></div>
   <div class="cursor-glow"></div>
@@ -34,13 +51,20 @@
       <a href="#inicio" class="logo">Felialej</a>
 
       <ul class="nav-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#sobre-mi">Sobre mí</a></li>
-        <li><a href="#tema-destacado">Tema destacado</a></li>
-        <li><a href="#musica">Música</a></li>
-        <li><a href="#galeria">Galería</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="#inicio" data-i18n="navInicio">Inicio</a></li>
+        <li><a href="#sobre-mi" data-i18n="navSobreMi">Sobre mí</a></li>
+        <li><a href="#tema-destacado" data-i18n="navTemaDestacado">Tema destacado</a></li>
+        <li><a href="#musica" data-i18n="navMusica">Música</a></li>
+        <li><a href="#video" data-i18n="navVideo">Video</a></li>
+        <li><a href="#galeria" data-i18n="navGaleria">Galería</a></li>
+        <li><a href="#contacto" data-i18n="navContacto">Contacto</a></li>
       </ul>
+
+      <div class="language-switcher" aria-label="Selector de idioma">
+        <button class="language-btn active" type="button" data-lang="es">ES</button>
+        <button class="language-btn" type="button" data-lang="en">EN</button>
+        <button class="language-btn" type="button" data-lang="pt">PT</button>
+      </div>
 
       <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
         <i class="fa-solid fa-bars"></i>
@@ -52,19 +76,19 @@
     <!-- Inicio -->
     <section class="hero section" id="inicio">
       <div class="hero-content">
-        <p class="hero-subtitle">Cantante & Productor</p>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">Cantante & Productor</p>
 
         <h1>FELIALEJ</h1>
 
-        <h2>Expresado en acordes y letras</h2>
+        <h2 data-i18n="heroTitle">Expresado en acordes y letras</h2>
 
-        <p class="hero-description">
+        <p class="hero-description" data-i18n="heroDescription">
           Artista de la ciudad de Villavicencio. Urbano, balada, pop.
         </p>
 
         <div class="hero-buttons">
-          <a href="#tema-destacado" class="btn btn-primary">Escuchar tema</a>
-          <a href="#galeria" class="btn btn-secondary">Ver galería</a>
+          <a href="#tema-destacado" class="btn btn-primary" data-i18n="btnEscucharTema">Escuchar tema</a>
+          <a href="#galeria" class="btn btn-secondary" data-i18n="btnVerGaleria">Ver galería</a>
         </div>
 
         <div class="social-icons">
@@ -72,7 +96,7 @@
             <i class="fa-brands fa-instagram"></i>
           </a>
 
-          <a href="https://www.tiktok.com/@felialej/" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Felialej">
+          <a href="https://www.tiktok.com/@felialej" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Felialej">
             <i class="fa-brands fa-tiktok"></i>
           </a>
 
@@ -91,40 +115,41 @@
       </div>
 
       <div class="hero-image-card">
-        <div class="image-placeholder">
-          <p>Foto principal</p>
-          <span>Luego pondremos aquí una foto tuya en concierto</span>
-        </div>
+        <img
+          src="assets/img/Concierto 1.png"
+          alt="Felialej en concierto"
+          class="hero-main-image"
+        />
       </div>
     </section>
 
     <!-- Sobre mí -->
     <section class="about section" id="sobre-mi">
       <div class="section-title">
-        <p>Conoce al artista</p>
-        <h2>Sobre Felialej</h2>
+        <p data-i18n="sobreEtiqueta">Conoce al artista</p>
+        <h2 data-i18n="sobreTitulo">Sobre Felialej</h2>
       </div>
 
       <div class="about-content">
         <div class="about-card">
-          <h3>Origen</h3>
-          <p>
+          <h3 data-i18n="origenTitulo">Origen</h3>
+          <p data-i18n="origenTexto">
             Felialej es un cantante y productor de la ciudad de Villavicencio que se desmpeña
             principalmente en el género Urbano, pop y balada.
           </p>
         </div>
 
         <div class="about-card">
-          <h3>Proceso</h3>
-          <p>
+          <h3 data-i18n="procesoTitulo">Proceso</h3>
+          <p data-i18n="procesoTexto">
             Su proyecto artístico combina interpretación, performance, producción musical y un sonido que
             busca ser más recordable.
           </p>
         </div>
 
         <div class="about-card">
-          <h3>Escenario</h3>
-          <p>
+          <h3 data-i18n="escenarioTitulo">Escenario</h3>
+          <p data-i18n="escenarioTexto">
             Cada presentación y cada canción hacen parte de una evolución artística
             que une sonido, imagen y experiencia.
           </p>
@@ -135,17 +160,17 @@
     <!-- Último lanzamiento -->
     <section class="featured-track section" id="tema-destacado">
       <div class="section-title">
-        <p>Reproduce ahora</p>
-        <h2>Último lanzamiento</h2>
+        <p data-i18n="reproduceAhora">Reproduce ahora</p>
+        <h2 class="soft-gold-glow" data-i18n="ultimoLanzamiento">Último lanzamiento</h2>
       </div>
 
       <div class="spotify-feature">
         <div class="spotify-info">
-          <span class="featured-label">Spotify Player</span>
+          <span class="featured-label" data-i18n="spotifyPlayer">Spotify Player</span>
 
-          <h3>Verte</h3>
+          <h3 class="soft-gold-glow">Verte</h3>
 
-          <p>
+          <p data-i18n="spotifyTexto">
             Escucha el último lanzamiento de Felialej directamente desde Spotify
             y continúa explorando su música en las plataformas oficiales.
           </p>
@@ -163,9 +188,11 @@
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-primary"
+            data-i18n="abrirSpotify"
           >
             Abrir en Spotify
           </a>
+
         </div>
 
         <div class="spotify-embed-card">
@@ -186,53 +213,97 @@
     <!-- Música -->
     <section class="music section" id="musica">
       <div class="section-title">
-        <p>Plataformas oficiales</p>
-        <h2>Música</h2>
+        <p data-i18n="plataformasOficiales">Plataformas oficiales</p>
+        <h2 data-i18n="musicaTitulo">Música</h2>
       </div>
 
       <div class="music-grid">
         <a href="https://open.spotify.com/intl-es/artist/2t1Gy01LImkqYBTwyTartn?si=nK4iIxqYTCyqvPfP6fFDLw" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="Spotify de Felialej">
           <i class="fa-brands fa-spotify"></i>
           <h3>Spotify</h3>
-          <p>Escuchar música oficial</p>
+          <p data-i18n="spotifyCardTexto">Escuchar música oficial</p>
         </a>
 
         <a href="https://music.apple.com/us/artist/felialej/1645318756" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="Apple Music de Felialej">
           <i class="fa-brands fa-apple"></i>
           <h3>Apple Music</h3>
-          <p>Reproducir canciones oficiales</p>
+          <p data-i18n="appleCardTexto">Reproducir canciones oficiales</p>
         </a>
 
         <a href="https://www.youtube.com/@FelialejOficial" target="_blank" rel="noopener noreferrer" class="music-card" aria-label="YouTube de Felialej">
           <i class="fa-brands fa-youtube"></i>
           <h3>YouTube</h3>
-          <p>Ver videos oficiales</p>
+          <p data-i18n="youtubeCardTexto">Ver videos oficiales</p>
         </a>
+      </div>
+    </section>
+
+    <!-- Video destacado -->
+    <section class="video-section section" id="video">
+      <div class="section-title">
+        <p data-i18n="videoEtiqueta">Contenido audiovisual</p>
+        <h2 data-i18n="videoTitulo">Video destacado</h2>
+      </div>
+
+      <div class="video-feature">
+        <div class="video-info">
+          <span class="featured-label" data-i18n="videoLabel">YouTube Player</span>
+          <h3 data-i18n="videoNombre">Felialej en video</h3>
+          <p data-i18n="videoTexto">
+            Reproduce este video directamente en la página y sigue explorando más contenido en el canal oficial de YouTube.
+          </p>
+
+          <a
+            href="https://youtu.be/6UeKFgFfFxc?si=8KvdcSylydj6AGzn"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-secondary"
+            data-i18n="abrirYoutube"
+          >
+            Abrir en YouTube
+          </a>
+        </div>
+
+        <div class="video-player-card">
+          <iframe
+            title="Video destacado de Felialej"
+            src="https://www.youtube.com/embed/6UeKFgFfFxc?rel=0&modestbranding=1&playsinline=1"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin">
+          </iframe>
+        </div>
       </div>
     </section>
 
     <!-- Galería -->
     <section class="gallery section" id="galeria">
       <div class="section-title">
-        <p>Momentos visuales</p>
-        <h2>Galería</h2>
+        <p data-i18n="momentosVisuales">Momentos visuales</p>
+        <h2 data-i18n="galeriaTitulo">Galería</h2>
       </div>
 
       <div class="gallery-grid">
         <div class="gallery-item">
-          <p>Foto 1</p>
+          <img src="assets/img/Concierto 2.png" alt="Felialej en concierto 1" />
+          <div class="gallery-overlay">
+            <p data-i18n="foto1">Foto 1</p>
+          </div>
         </div>
 
         <div class="gallery-item">
-          <p>Foto 2</p>
+          <img src="assets/img/Concierto 4.png" alt="Felialej en concierto 2" />
+          <div class="gallery-overlay">
+            <p data-i18n="foto2">Foto 2</p>
+          </div>
         </div>
 
         <div class="gallery-item">
-          <p>Foto 3</p>
-        </div>
-
-        <div class="gallery-item">
-          <p>Foto 4</p>
+          <img src="assets/img/Concierto 5.png" alt="Felialej en concierto 3" />
+          <div class="gallery-overlay">
+            <p data-i18n="foto3">Foto 3</p>
+          </div>
         </div>
       </div>
     </section>
@@ -240,12 +311,12 @@
     <!-- Contacto -->
     <section class="contact section" id="contacto">
       <div class="section-title">
-        <p>Booking y contacto</p>
-        <h2>Conecta con Felialej</h2>
+        <p data-i18n="bookingContacto">Booking y contacto</p>
+        <h2 data-i18n="contactoTitulo">Conecta con Felialej</h2>
       </div>
 
       <div class="contact-box">
-        <p>
+        <p data-i18n="contactoTexto">
           Para colaboraciones, eventos, producción musical o contacto artístico,
           puedes conectar directamente por redes sociales y plataformas oficiales.
         </p>
@@ -253,42 +324,38 @@
         <div class="contact-buttons">
           <a href="https://www.instagram.com/felialej_/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Instagram</a>
           <a href="https://www.youtube.com/@FelialejOficial" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">YouTube</a>
-          <a href="https://www.tiktok.com/@felialej/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">TikTok</a>
+          <a href="https://www.tiktok.com/@felialej" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">TikTok</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Aviso para navegador interno de Instagram -->
-  <div class="instagram-browser-notice" id="instagramBrowserNotice" aria-hidden="true">
-    <div class="instagram-browser-card">
-      <button class="instagram-browser-close" id="instagramBrowserClose" type="button" aria-label="Cerrar aviso">
-        &times;
-      </button>
+  <!-- Botón flotante de redes -->
+  <div class="floating-socials" aria-label="Redes sociales de Felialej">
+    <button class="floating-main-btn" type="button" id="floatingSocialBtn" aria-label="Abrir redes sociales">
+      <i class="fa-solid fa-plus"></i>
+    </button>
 
-      <i class="fa-brands fa-tiktok"></i>
+    <div class="floating-social-list" id="floatingSocialList">
+      <a href="https://www.instagram.com/felialej_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Felialej">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
 
-      <h3>TikTok puede no abrir desde Instagram</h3>
+      <a href="https://www.tiktok.com/@felialej" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Felialej">
+        <i class="fa-brands fa-tiktok"></i>
+      </a>
 
-      <p>
-        Si el enlace no abre correctamente, toca los tres puntos del navegador de Instagram y elige
-        “Abrir en navegador”. También puedes copiar el enlace.
-      </p>
+      <a href="https://www.youtube.com/@FelialejOficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Felialej">
+        <i class="fa-brands fa-youtube"></i>
+      </a>
 
-      <div class="instagram-browser-actions">
-        <a
-          href="https://www.tiktok.com/@felialej/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
-        >
-          Intentar abrir TikTok
-        </a>
+      <a href="https://open.spotify.com/intl-es/artist/2t1Gy01LImkqYBTwyTartn?si=nK4iIxqYTCyqvPfP6fFDLw" target="_blank" rel="noopener noreferrer" aria-label="Spotify de Felialej">
+        <i class="fa-brands fa-spotify"></i>
+      </a>
 
-        <button class="btn btn-secondary" type="button" id="copyTikTokLink">
-          Copiar enlace
-        </button>
-      </div>
+      <a href="https://music.apple.com/us/artist/felialej/1645318756" target="_blank" rel="noopener noreferrer" aria-label="Apple Music de Felialej">
+        <i class="fa-brands fa-apple"></i>
+      </a>
     </div>
   </div>
 
