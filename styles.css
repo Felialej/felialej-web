@@ -1290,6 +1290,81 @@ body {
   will-change: transform;
 }
 
+
+/* =========================
+   AVISO TIKTOK EN NAVEGADOR DE INSTAGRAM
+========================= */
+.instagram-browser-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 15000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(12px);
+}
+
+.instagram-browser-notice.active {
+  display: flex;
+}
+
+.instagram-browser-card {
+  position: relative;
+  width: min(520px, 92vw);
+  padding: 34px;
+  border-radius: 30px;
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(21, 21, 21, 0.97), rgba(8, 8, 8, 0.96)) padding-box,
+    linear-gradient(135deg, rgba(212, 175, 55, 0.58), rgba(122, 44, 255, 0.5)) border-box;
+  border: 1px solid transparent;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.58);
+}
+
+.instagram-browser-close {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  border: none;
+  background: transparent;
+  color: var(--white);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.instagram-browser-card i {
+  font-size: 2.4rem;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.instagram-browser-card h3 {
+  font-size: 1.45rem;
+  margin-bottom: 14px;
+  color: var(--white);
+}
+
+.instagram-browser-card p {
+  color: var(--gray);
+  line-height: 1.75;
+  margin-bottom: 24px;
+}
+
+.instagram-browser-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.instagram-browser-actions .btn {
+  border: none;
+  cursor: pointer;
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
