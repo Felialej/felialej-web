@@ -1,4 +1,28 @@
 // =========================
+// ABRIR SIEMPRE DESDE EL INICIO
+// =========================
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+const forceStartAtTop = () => {
+  if (window.location.hash) {
+    history.replaceState(null, document.title, window.location.pathname + window.location.search);
+  }
+
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "auto"
+  });
+};
+
+window.addEventListener("DOMContentLoaded", forceStartAtTop);
+window.addEventListener("load", () => {
+  setTimeout(forceStartAtTop, 50);
+});
+
+// =========================
 // MENÚ RESPONSIVE
 // =========================
 const menuBtn = document.getElementById("menuBtn");
