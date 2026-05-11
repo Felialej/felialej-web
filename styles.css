@@ -35,6 +35,21 @@ body {
 }
 
 /* =========================
+   BARRA DE PROGRESO DE SCROLL
+========================= */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  z-index: 25000;
+  background: linear-gradient(90deg, var(--gold), var(--purple), var(--gold-soft));
+  box-shadow: 0 0 18px rgba(212, 175, 55, 0.45);
+  transition: width 0.08s linear;
+}
+
+/* =========================
    CURSOR PERSONALIZADO
 ========================= */
 .cursor,
@@ -52,13 +67,26 @@ body {
   width: 10px;
   height: 10px;
   background: var(--gold);
+  transition: transform 0.15s ease, background 0.15s ease;
 }
 
 .cursor-glow {
   width: 45px;
   height: 45px;
   border: 1px solid rgba(212, 175, 55, 0.5);
-  transition: 0.08s ease-out;
+  transition: 0.08s ease-out, width 0.18s ease, height 0.18s ease, background 0.18s ease;
+}
+
+.cursor.hovered {
+  transform: translate(-50%, -50%) scale(1.8);
+  background: var(--white);
+}
+
+.cursor-glow.hovered {
+  width: 64px;
+  height: 64px;
+  border-color: rgba(212, 175, 55, 0.72);
+  background: rgba(212, 175, 55, 0.04);
 }
 
 /* =========================
@@ -86,6 +114,7 @@ body {
   border-radius: 50%;
   filter: blur(15px);
   animation: float 12s infinite ease-in-out;
+  will-change: transform;
 }
 
 .background-effects span:nth-child(1) {
@@ -115,15 +144,18 @@ body {
 
 @keyframes float {
   0% {
-    transform: translateY(0) scale(1);
+    translate: 0 0;
+    scale: 1;
   }
 
   50% {
-    transform: translateY(-45px) scale(1.15);
+    translate: 0 -45px;
+    scale: 1.15;
   }
 
   100% {
-    transform: translateY(0) scale(1);
+    translate: 0 0;
+    scale: 1;
   }
 }
 
@@ -191,11 +223,13 @@ body {
   transition: 0.3s ease;
 }
 
-.nav-links a:hover {
+.nav-links a:hover,
+.nav-links a.active-link {
   color: var(--white);
 }
 
-.nav-links a:hover::after {
+.nav-links a:hover::after,
+.nav-links a.active-link::after {
   width: 100%;
 }
 
@@ -207,8 +241,6 @@ body {
   font-size: 1.5rem;
   cursor: pointer;
 }
-
-
 
 /* =========================
    INTRO VISUAL DE CARGA
@@ -294,13 +326,47 @@ body {
   letter-spacing: 2px;
 }
 
+.intro-progress {
+  width: min(260px, 62vw);
+  height: 4px;
+  margin: 22px auto 0;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.intro-progress-bar {
+  display: block;
+  width: 0%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--gold), var(--purple), var(--gold-soft));
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.42);
+  animation: introLoadBar 1.65s ease forwards;
+}
+
+@keyframes introLoadBar {
+  0% {
+    width: 0%;
+  }
+
+  58% {
+    width: 72%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
 @keyframes introSpin {
   from {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
 
   to {
-    transform: rotate(360deg);
+    rotate: 360deg;
   }
 }
 
@@ -475,11 +541,13 @@ body {
   line-height: 0.9;
   letter-spacing: 6px;
   background: linear-gradient(120deg, #ffffff, #d4af37, #7a2cff);
+  background-size: 220% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   text-transform: uppercase;
   text-shadow: 0 0 45px rgba(122, 44, 255, 0.25);
+  animation: felialejSoftGoldSweep 7s ease-in-out infinite;
 }
 
 .hero h2 {
@@ -586,32 +654,54 @@ body {
   border: 1px solid transparent;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
   animation: cardFloat 5s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
 }
 
-.image-placeholder {
+.hero-main-image {
+  width: 100%;
   height: 100%;
   min-height: 490px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
   border-radius: 26px;
-  background:
-    linear-gradient(rgba(8, 8, 8, 0.45), rgba(8, 8, 8, 0.85)),
-    radial-gradient(circle at center, rgba(122, 44, 255, 0.35), transparent 45%),
-    #111;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 30px;
+  filter: brightness(0.86) contrast(1.08) saturate(1.08);
+  transition: 0.45s ease;
 }
 
-.image-placeholder p {
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 12px;
+.hero-image-card::after {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border-radius: 26px;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.14), transparent 70%);
+  transform: translateX(-140%);
+  animation: photoLightSweep 7s ease-in-out infinite;
+  pointer-events: none;
 }
 
-.image-placeholder span {
-  color: var(--gray);
+.hero-image-card:hover .hero-main-image {
+  transform: scale(1.035);
+  filter: brightness(0.96) contrast(1.12) saturate(1.16);
+}
+
+@keyframes photoLightSweep {
+  0%,
+  72%,
+  100% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+
+  82% {
+    opacity: 1;
+  }
+
+  92% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
 }
 
 /* =========================
@@ -730,6 +820,7 @@ body {
   line-height: 1.8;
   margin-bottom: 22px;
 }
+
 
 .audio-bars {
   display: flex;
@@ -855,7 +946,6 @@ body {
   color: var(--gray);
 }
 
-
 /* =========================
    VIDEO DESTACADO
 ========================= */
@@ -934,7 +1024,7 @@ body {
 ========================= */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 20px;
 }
@@ -942,24 +1032,56 @@ body {
 .gallery-item {
   min-height: 280px;
   border-radius: 26px;
-  background:
-    linear-gradient(rgba(8, 8, 8, 0.25), rgba(8, 8, 8, 0.82)),
-    radial-gradient(circle at top, rgba(122, 44, 255, 0.35), transparent 50%),
-    #161616;
   border: 1px solid var(--line);
-  display: grid;
-  place-items: center;
+  display: block;
   color: var(--gold);
   font-size: 1.4rem;
   cursor: pointer;
   transition: 0.35s ease;
   overflow: hidden;
+  position: relative;
+  background: #161616;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.75) saturate(1.05);
+  transition: 0.35s ease;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: end;
+  justify-content: flex-start;
+  padding: 22px;
+  background:
+    linear-gradient(rgba(8, 8, 8, 0.02), rgba(8, 8, 8, 0.82)),
+    radial-gradient(circle at top, rgba(122, 44, 255, 0.18), transparent 50%);
+}
+
+.gallery-overlay p {
+  color: var(--gold);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 2px;
 }
 
 .gallery-item:hover {
   transform: scale(1.04) rotate(-1deg);
   border-color: rgba(212, 175, 55, 0.65);
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+}
+
+.gallery-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(0.92) saturate(1.18);
 }
 
 /* =========================
@@ -1021,18 +1143,26 @@ body {
 }
 
 .modal-content {
-  width: min(850px, 90vw);
-  min-height: 480px;
+  width: min(980px, 92vw);
+  max-height: 82vh;
   border-radius: 30px;
-  background:
-    linear-gradient(rgba(8, 8, 8, 0.35), rgba(8, 8, 8, 0.88)),
-    radial-gradient(circle at center, rgba(212, 175, 55, 0.25), transparent 50%),
-    #181818;
+  background: #181818;
   border: 1px solid rgba(212, 175, 55, 0.45);
   display: grid;
   place-items: center;
   color: var(--gold);
   font-size: 2rem;
+  overflow: hidden;
+  box-shadow: 0 30px 95px rgba(0, 0, 0, 0.62);
+}
+
+.modal-content img {
+  width: 100%;
+  height: 100%;
+  max-height: 82vh;
+  display: block;
+  object-fit: contain;
+  background: #080808;
 }
 
 /* =========================
@@ -1086,6 +1216,88 @@ body {
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* =========================
+   BRILLO SUAVE SOLO EN TÍTULOS PRINCIPALES
+========================= */
+.soft-gold-glow {
+  animation: softTitleGoldGlow 7s ease-in-out infinite;
+}
+
+@keyframes felialejSoftGoldSweep {
+  0%,
+  76%,
+  100% {
+    background-position: 0% center;
+    filter: drop-shadow(0 0 0 rgba(212, 175, 55, 0));
+  }
+
+  84% {
+    background-position: 100% center;
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.22));
+  }
+
+  90% {
+    background-position: 50% center;
+    filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.26));
+  }
+}
+
+@keyframes softTitleGoldGlow {
+  0%,
+  76%,
+  100% {
+    color: var(--white);
+    text-shadow: none;
+  }
+
+  84% {
+    color: var(--gold);
+    text-shadow:
+      0 0 7px rgba(212, 175, 55, 0.24),
+      0 0 18px rgba(212, 175, 55, 0.16);
+  }
+
+  90% {
+    color: var(--gold-soft);
+    text-shadow:
+      0 0 9px rgba(212, 175, 55, 0.28),
+      0 0 22px rgba(212, 175, 55, 0.18);
+  }
+}
+
+/* =========================
+   REPRODUCTORES ESTABLES
+========================= */
+.spotify-feature,
+.video-feature {
+  transform: none;
+}
+
+/* =========================
+   OPTIMIZACIÓN DE INTERACTIVIDAD
+========================= */
+.btn,
+.social-icons a,
+.music-card,
+.gallery-item,
+.floating-main-btn,
+.floating-social-list a,
+.language-btn,
+.about-card,
+.hero-image-card {
+  will-change: transform;
+}
+
+
+/* =========================
+   MEJORA TÁCTIL PARA REDES EN CELULAR
+========================= */
+.social-icons a,
+.floating-social-list a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* =========================
@@ -1223,19 +1435,11 @@ body {
     font-size: 3.8rem;
   }
 
-  .hero-subtitle {
-    min-height: 2.8em;
-    line-height: 1.35;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   .hero-image-card {
     min-height: 420px;
   }
 
-  .image-placeholder {
+  .hero-main-image {
     min-height: 390px;
   }
 
