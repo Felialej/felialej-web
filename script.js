@@ -516,3 +516,60 @@ window.addEventListener("mousemove", (event) => {
     blob.style.marginTop = `${moveY * depth}px`;
   });
 });
+
+// =========================
+// AVISO TIKTOK EN NAVEGADOR DE INSTAGRAM
+// =========================
+const tikTokUrl = "https://www.tiktok.com/@felialej/";
+const instagramBrowserNotice = document.getElementById("instagramBrowserNotice");
+const instagramBrowserClose = document.getElementById("instagramBrowserClose");
+const copyTikTokLink = document.getElementById("copyTikTokLink");
+
+const isInstagramInAppBrowser = () => {
+  return /Instagram/i.test(navigator.userAgent);
+};
+
+const openInstagramTikTokNotice = () => {
+  if (!instagramBrowserNotice) return;
+
+  instagramBrowserNotice.classList.add("active");
+  instagramBrowserNotice.setAttribute("aria-hidden", "false");
+};
+
+const closeInstagramTikTokNotice = () => {
+  if (!instagramBrowserNotice) return;
+
+  instagramBrowserNotice.classList.remove("active");
+  instagramBrowserNotice.setAttribute("aria-hidden", "true");
+};
+
+document.querySelectorAll('a[href*="tiktok.com/@felialej"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    if (!isInstagramInAppBrowser()) return;
+
+    event.preventDefault();
+    openInstagramTikTokNotice();
+  });
+});
+
+instagramBrowserClose?.addEventListener("click", closeInstagramTikTokNotice);
+
+instagramBrowserNotice?.addEventListener("click", (event) => {
+  if (event.target === instagramBrowserNotice) {
+    closeInstagramTikTokNotice();
+  }
+});
+
+copyTikTokLink?.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(tikTokUrl);
+    copyTikTokLink.textContent = "Enlace copiado";
+  } catch (error) {
+    copyTikTokLink.textContent = "Copia: @felialej";
+  }
+
+  setTimeout(() => {
+    copyTikTokLink.textContent = "Copiar enlace";
+  }, 2200);
+});
+
