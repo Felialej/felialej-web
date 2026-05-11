@@ -234,11 +234,9 @@ applyLanguage(currentLanguage);
 const introLoader = document.getElementById("introLoader");
 
 window.addEventListener("load", () => {
-  if (!introLoader) return;
-
   setTimeout(() => {
     introLoader.classList.add("hide");
-  }, 1900);
+  }, 1700);
 });
 
 // =========================
@@ -260,9 +258,7 @@ document.addEventListener("click", (event) => {
 // =========================
 // EFECTO 3D EN TARJETAS
 // =========================
-const cards3D = document.querySelectorAll(
-  ".about-card, .music-card, .gallery-item, .hero-image-card"
-);
+const cards3D = document.querySelectorAll(".about-card, .music-card, .gallery-item, .hero-image-card");
 
 cards3D.forEach((card) => {
   card.addEventListener("mousemove", (event) => {
@@ -320,16 +316,7 @@ const modalContent = document.getElementById("modalContent");
 
 galleryItems.forEach((item, index) => {
   item.addEventListener("click", () => {
-    const image = item.querySelector("img");
-    const imageSource = image ? image.getAttribute("src") : "";
-    const imageAlt = image ? image.getAttribute("alt") : `${translations[currentLanguage].modalFoto} ${index + 1}`;
-
-    if (imageSource) {
-      modalContent.innerHTML = `<img src="${imageSource}" alt="${imageAlt}" />`;
-    } else {
-      modalContent.innerHTML = `<p>${translations[currentLanguage].modalFoto} ${index + 1}</p>`;
-    }
-
+    modalContent.innerHTML = `<p>${translations[currentLanguage].modalFoto} ${index + 1}</p>`;
     imageModal.classList.add("active");
   });
 });
@@ -413,82 +400,4 @@ window.addEventListener("scroll", () => {
   } else {
     header.classList.remove("scrolled");
   }
-});
-
-// =========================
-// PROGRESO DE SCROLL
-// =========================
-const scrollProgress = document.getElementById("scrollProgress");
-
-const updateScrollProgress = () => {
-  if (!scrollProgress) return;
-
-  const scrollTop = window.scrollY;
-  const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const progress = documentHeight > 0 ? (scrollTop / documentHeight) * 100 : 0;
-
-  scrollProgress.style.width = `${progress}%`;
-};
-
-window.addEventListener("scroll", updateScrollProgress);
-window.addEventListener("load", updateScrollProgress);
-
-// =========================
-// MENÚ ACTIVO SEGÚN SECCIÓN
-// =========================
-const navAnchors = document.querySelectorAll(".nav-links a[href^='#']");
-const observedSections = document.querySelectorAll("main section[id]");
-
-const updateActiveLink = () => {
-  let currentSectionId = "inicio";
-
-  observedSections.forEach((section) => {
-    const rect = section.getBoundingClientRect();
-
-    if (rect.top <= 160 && rect.bottom >= 160) {
-      currentSectionId = section.id;
-    }
-  });
-
-  navAnchors.forEach((link) => {
-    link.classList.toggle("active-link", link.getAttribute("href") === `#${currentSectionId}`);
-  });
-};
-
-window.addEventListener("scroll", updateActiveLink);
-window.addEventListener("load", updateActiveLink);
-
-// =========================
-// CURSOR REACTIVO EN ELEMENTOS INTERACTIVOS
-// =========================
-const interactiveElements = document.querySelectorAll(
-  "a, button, .music-card, .gallery-item, .about-card"
-);
-
-interactiveElements.forEach((element) => {
-  element.addEventListener("mouseenter", () => {
-    cursor?.classList.add("hovered");
-    cursorGlow?.classList.add("hovered");
-  });
-
-  element.addEventListener("mouseleave", () => {
-    cursor?.classList.remove("hovered");
-    cursorGlow?.classList.remove("hovered");
-  });
-});
-
-// =========================
-// FONDO CON PARALLAX SUAVE
-// =========================
-const backgroundBlobs = document.querySelectorAll(".background-effects span");
-
-window.addEventListener("mousemove", (event) => {
-  const moveX = (event.clientX / window.innerWidth - 0.5) * 18;
-  const moveY = (event.clientY / window.innerHeight - 0.5) * 18;
-
-  backgroundBlobs.forEach((blob, index) => {
-    const depth = (index + 1) * 0.55;
-    blob.style.marginLeft = `${moveX * depth}px`;
-    blob.style.marginTop = `${moveY * depth}px`;
-  });
 });
