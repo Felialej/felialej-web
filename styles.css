@@ -1290,6 +1290,16 @@ body {
   will-change: transform;
 }
 
+
+/* =========================
+   MEJORA TÁCTIL PARA REDES EN CELULAR
+========================= */
+.social-icons a,
+.floating-social-list a {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* =========================
    RESPONSIVE
 ========================= */
