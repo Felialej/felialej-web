@@ -1425,6 +1425,14 @@ body {
     font-size: 3.8rem;
   }
 
+  .hero-subtitle {
+    min-height: 2.8em;
+    line-height: 1.35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hero-image-card {
     min-height: 420px;
   }
